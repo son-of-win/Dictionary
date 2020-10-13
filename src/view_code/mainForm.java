@@ -1,10 +1,14 @@
 package view_code;
 import source_code.*;
+
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.DefaultListModel;
-
-import javax.swing.JFrame;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyEvent;
+import java.net.URI;
+import javax.swing.*;
 
 /**
  *
@@ -17,11 +21,12 @@ public class mainForm extends javax.swing.JFrame {
      */
     public DictionaryCommandLine manage = new DictionaryCommandLine();
     DefaultListModel <String> list = new DefaultListModel <String> ();
+//    final DefaultComboBoxModel his = new DefaultComboBoxModel();
     public mainForm() {
         initComponents();
 
 
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // this.setVisible(true);
     }
 
@@ -34,10 +39,11 @@ public class mainForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        background = new javax.swing.JPanel();
         inputText = new javax.swing.JTextField();
         taskBarField = new javax.swing.JPanel();
         Api = new javax.swing.JButton();
+        history = new javax.swing.JComboBox<>();
         suggestWord = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         resultSuggest = new javax.swing.JList<>();
@@ -48,6 +54,7 @@ public class mainForm extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         find = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,6 +71,14 @@ public class mainForm extends javax.swing.JFrame {
         Api.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         Api.setForeground(new java.awt.Color(255, 255, 153));
         Api.setText("Dịch văn bản");
+        Api.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ApiActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel3.setText("HISTORY");
 
         javax.swing.GroupLayout taskBarFieldLayout = new javax.swing.GroupLayout(taskBarField);
         taskBarField.setLayout(taskBarFieldLayout);
@@ -71,12 +86,18 @@ public class mainForm extends javax.swing.JFrame {
                 taskBarFieldLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, taskBarFieldLayout.createSequentialGroup()
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(history, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(55, 55, 55)
                                 .addComponent(Api, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(81, 81, 81))
         );
         taskBarFieldLayout.setVerticalGroup(
                 taskBarFieldLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(Api, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+                        .addComponent(Api, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(history)
         );
 
         suggestWord.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -121,7 +142,7 @@ public class mainForm extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/baseline_explore_black_18dp.png"))); // NOI18N
-        jLabel2.setText("Dictionary made by Huu Vuot");
+        jLabel2.setText("My Dictionary");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -144,17 +165,17 @@ public class mainForm extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
+        background.setLayout(backgroundLayout);
+        backgroundLayout.setHorizontalGroup(
+                backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(backgroundLayout.createSequentialGroup()
+                                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(backgroundLayout.createSequentialGroup()
                                                 .addComponent(inputText)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(find, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                 .addComponent(suggestWord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
@@ -162,18 +183,18 @@ public class mainForm extends javax.swing.JFrame {
                         .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(taskBarField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
+        backgroundLayout.setVerticalGroup(
+                backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(backgroundLayout.createSequentialGroup()
                                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(taskBarField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
                                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                         .addComponent(inputText, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addComponent(find, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -185,26 +206,38 @@ public class mainForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(background, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
-    }// </editor-fold>                        
+        setLocationRelativeTo(null);
+        setResizable(false);
+    }// </editor-fold>
 
     private void findActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
 
         String text = inputText.getText();
         String result = manage.lookUp(text);
-
+        history.addItem(text);
         resultLookup.setText(result);
         resultLookup.setEditable(false);
+    }
 
+    private void ApiActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+        try {
+            //create a URI
+            URI url = new URI("https://translate.google.com/?hl=vi");
+            Desktop run = Desktop.getDesktop();
+            run.browse(url);
+        } catch(Exception e){
 
+        }
     }
 
     private void resultSuggestMouseClicked(java.awt.event.MouseEvent evt) {
@@ -212,7 +245,10 @@ public class mainForm extends javax.swing.JFrame {
         int index = resultSuggest.getSelectedIndex();
         String text = list.elementAt(index);
         String result = manage.lookUp(text);
-        resultLookup.setText(result);
+//        resultLookup.setCo
+        resultLookup.setText("<html> <strong>" + result + "</strong></html>");
+
+        history.addItem(text);
     }
 
     private void inputTextActionPerformed(java.awt.event.ActionEvent evt) {
@@ -228,6 +264,11 @@ public class mainForm extends javax.swing.JFrame {
 
         resultSuggest.setModel(list);
 
+    }
+
+    private void setInputTextWindowFocusListener(KeyEvent e) {
+        int code = e.getKeyCode();
+        System.out.print(code);
     }
 
     /**
@@ -258,25 +299,23 @@ public class mainForm extends javax.swing.JFrame {
         //</editor-fold>
         new mainForm();
 
-
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-
-                new mainForm().setVisible(true);
-
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new mainForm().setVisible(true);
+//            }
+//        });
     }
 
     // Variables declaration - do not modify                     
     private javax.swing.JButton Api;
+    private javax.swing.JPanel background;
     private javax.swing.JPanel description;
     private javax.swing.JButton find;
+    private javax.swing.JComboBox<String> history;
     private javax.swing.JTextField inputText;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane resultFind;
@@ -284,6 +323,7 @@ public class mainForm extends javax.swing.JFrame {
     private javax.swing.JList<String> resultSuggest;
     private javax.swing.JPanel suggestWord;
     private javax.swing.JPanel taskBarField;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration                   
 
 
